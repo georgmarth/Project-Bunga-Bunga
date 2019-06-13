@@ -101,9 +101,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7421532257066740962}
   - component: {fileID: 9166359366392729447}
+  - component: {fileID: 328973910}
   m_Layer: 0
   m_Name: TaskLocation
-  m_TagString: Untagged
+  m_TagString: TaskLocation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,3 +137,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.147214, z: 1}
   m_Center: {x: 0, y: 1.0580945, z: 0}
+--- !u!114 &328973910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421532257066740961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6fd8d0c686d8ec4f97bc0f28c007128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Task: {fileID: 0}
+  PatronLocations: []
+  Locations: []

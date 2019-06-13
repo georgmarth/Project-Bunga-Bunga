@@ -5,6 +5,14 @@ using UnityEngine;
 public class TaskLocation : MonoBehaviour
 {
     public PlayerTask Task;
-    public GameObject[] Patrons;
+    public PatronLocation[] PatronLocations;
     public Transform[] Locations;
+}
+
+[System.Serializable]
+public class PatronLocation
+{
+    public bool Reserved;
+    public Patron Patron;
+    public Transform Location;
 }
