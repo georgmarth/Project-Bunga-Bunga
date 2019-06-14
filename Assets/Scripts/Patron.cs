@@ -10,6 +10,8 @@ public class Patron : MonoBehaviour
     public PatronSettings PatronSettings;
     public NavMeshAgent Agent;
 
+    public MeshRenderer WalkArea;
+
     private int _completedTasks;
     private float _idleTimer;
     private PatronState _state;
@@ -18,27 +20,34 @@ public class Patron : MonoBehaviour
 
     private void Start()
     {
-        _state = PatronState.IDLE;
+        
         _idleTimer = Random.Range(PatronSettings.IdleTime.x, PatronSettings.IdleTime.y);
+        StartCoroutine(Idle());
+    }
+
+    private IEnumerator Idle()
+    {
+        _state = PatronState.IDLE;
+        for (int i = 0; i < PatronSettings.IdleLocations; i++)
+        {
+            var location = PickIdleLocation();
+            Agent.enabled = true;
+            Agent.SetDestination(location);
+            yield return new WaitForSeconds(Random.Range(PatronSettings.IdleWalkTime.x, PatronSettings.IdleWalkTime.y));
+            Agent.enabled = false;
+            yield return new WaitForSeconds(Random.Range(PatronSettings.IdleTime.x, PatronSettings.IdleTime.y));
+        }
+
+        _desiredTask = PickTask();
+        _state = PatronState.WALKING;
+
+        Agent.enabled = true;
+        Agent.SetDestination(_desiredTask.Location.position);
     }
 
     private void Update()
     {
-        if (_state == PatronState.IDLE)
-        {
-            _idleTimer -= Time.deltaTime;
-
-            if (_idleTimer <= 0f)
-            {
-                _desiredTask = PickTask();
-                _state = PatronState.WALKING;
-                StartWalking();
-            }
-            else
-            {
-
-            }
-        }
+        
     }
 
     private PatronLocation PickTask()
@@ -66,9 +75,12 @@ public class Patron : MonoBehaviour
         return null;
     }
 
-    private void StartWalking()
+    private Vector3 PickIdleLocation()
     {
-        Agent.SetDestination(_desiredTask.Location.position);
-        Agent.enabled = true;
+        Vector3 location = new Vector3(
+            Random.Range(WalkArea.bounds.min.x, WalkArea.bounds.max.x),
+            Random.Range(WalkArea.bounds.min.y, WalkArea.bounds.max.y),
+            Random.Range(WalkArea.bounds.min.z, WalkArea.bounds.max.z));
+        return location;
     }
 }

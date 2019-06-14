@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Patron Settings
   m_EditorClassIdentifier: 
   DesiredTasks: 3
-  MovementSpeed: 3
-  IdleTime: {x: 5, y: 10}
+  IdleLocations: 3
+  IdleTime: {x: 1, y: 3}
+  IdleWalkTime: {x: 5, y: 10}
+  Patience: 20
