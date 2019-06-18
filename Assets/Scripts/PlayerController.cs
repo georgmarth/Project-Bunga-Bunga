@@ -2,14 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Input;
+using UnityEngine.Experimental.Input.Plugins.PlayerInput;
+
 
 public class PlayerController : MonoBehaviour
 {
     public enum PlayerState { IDLE, INTERACTING, HOLDING }
 
     public float MovementForce = 50f;
+    public float BoostForce = 100f;
     public float MaxSpeed = 5f;
-    public float MaxBoostSpeed = 7f;
+    public float MaxBoostSpeed = 10f;
+    public float BoostTime = .2f;
+    public float BoostCooldown = 1f;
     public float RotationSpeed = 0.9f;
     public float RotationDeadZone = .05f;
     public float MovementDeadZone = .1f;
@@ -18,7 +24,13 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 _movementInput;
-    private bool _boost;
+    private float _speedLimit;
+
+    // Dash variables
+    private bool _dashing;
+    private Coroutine _dashRoutine;
+    private WaitForSeconds _boostTimeWait;
+    private WaitForSeconds _boostCooldownWait;
 
     private TaskLocation _currentLocation;
 
@@ -26,15 +38,45 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         State = PlayerState.IDLE;
+        _speedLimit = MaxSpeed;
+
+        _boostTimeWait = new WaitForSeconds(BoostTime);
+        _boostCooldownWait = new WaitForSeconds(BoostCooldown);
+        _dashing = false;
+    }
+
+    public void OnMove(InputValue value)
+    {
+        var v = value.Get<Vector2>();
+        _movementInput = new Vector3(v.x, 0f, v.y);
+    }
+
+    public void OnDash()
+    {
+        if (!_dashing)
+        {
+            _dashRoutine = StartCoroutine(DashRoutine());
+        }
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        _dashing = true;
+        rb.AddForce(transform.forward * BoostForce, ForceMode.Impulse);
+        _speedLimit = MaxBoostSpeed;
+        yield return _boostTimeWait;
+        _speedLimit = MaxSpeed;
+        yield return _boostCooldownWait;
+        _dashing = false;
     }
 
     void Update()
     {
         // INPUT
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        _movementInput = Vector3.ClampMagnitude(new Vector3(horizontal, 0f, vertical), 1f);
-        _boost = Input.GetButton("Fire2");
+        //float horizontal = Input.GetAxisRaw("Horizontal");
+        //float vertical = Input.GetAxisRaw("Vertical");
+        //_movementInput = Vector3.ClampMagnitude(new Vector3(horizontal, 0f, vertical), 1f);
+        //_boost = Input.GetButton("Fire2");
 
         if (Input.GetButtonDown("Fire1") && (State == PlayerState.IDLE || State == PlayerState.HOLDING ) && _currentLocation != null)
         {
@@ -47,6 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         StartCoroutine(TestPerform());
     }
+
 
     private IEnumerator TestPerform()
     {
@@ -95,10 +138,10 @@ public class PlayerController : MonoBehaviour
             // stop force
             if (_movementInput.sqrMagnitude <= MovementDeadZone * MovementDeadZone)
             {
-                rb.AddForce(rb.velocity * -.2f, ForceMode.VelocityChange);
+                rb.AddForce(rb.velocity * -.2f, ForceMode.Acceleration);
             }
 
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, _boost ? MaxBoostSpeed : MaxSpeed);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speedLimit);
 
             // ROTATION
             if (_movementInput.sqrMagnitude >= RotationDeadZone * RotationDeadZone)

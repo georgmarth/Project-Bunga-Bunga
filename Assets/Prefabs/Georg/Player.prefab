@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6320595536693363433}
   - component: {fileID: 6320595536693363432}
   - component: {fileID: 6320595536693363435}
+  - component: {fileID: 295469812}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -64,12 +65,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementForce: 50
+  BoostForce: 300
   MaxSpeed: 5
-  MaxBoostSpeed: 7
+  MaxBoostSpeed: 10
+  BoostTime: 0.2
+  BoostCooldown: 1
   RotationSpeed: 0.5
   RotationDeadZone: 0.05
   MovementDeadZone: 0.1
   State: 0
+--- !u!114 &295469812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6320595536693363438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: b5c101685c8c1704bbe32779f623f230,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIEventSystem: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Experimental.Input.Plugins.PlayerInput.PlayerInput+DeviceLostEvent,
+      Unity.InputSystem, Version=0.2.6.0, Culture=neutral, PublicKeyToken=null
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Experimental.Input.Plugins.PlayerInput.PlayerInput+DeviceRegainedEvent,
+      Unity.InputSystem, Version=0.2.6.0, Culture=neutral, PublicKeyToken=null
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Experimental.Input.Plugins.PlayerInput.PlayerInput+ActionEvent,
+      Unity.InputSystem, Version=0.2.6.0, Culture=neutral, PublicKeyToken=null
+    m_ActionId: 660baa1b-2a52-4f97-bba3-89346c6608ef
+    m_ActionName: 
+  - m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Experimental.Input.Plugins.PlayerInput.PlayerInput+ActionEvent,
+      Unity.InputSystem, Version=0.2.6.0, Culture=neutral, PublicKeyToken=null
+    m_ActionId: a16a8e41-e39d-46bd-ae0d-4880fa0ac9e9
+    m_ActionName: 
+  m_AutoSwitchControlScheme: 0
+  m_DefaultControlScheme: Gamepad
+  m_DefaultActionMap: '{9904b3c3-591a-4962-acbd-8731c2dce926}'
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6320595537773233090
 GameObject:
   m_ObjectHideFlags: 0

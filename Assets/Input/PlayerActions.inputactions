@@ -2,29 +2,153 @@
     "name": "PlayerActions",
     "maps": [
         {
-            "name": "New action map",
+            "name": "Character Action",
             "id": "9904b3c3-591a-4962-acbd-8731c2dce926",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Move",
                     "id": "660baa1b-2a52-4f97-bba3-89346c6608ef",
+                    "expectedControlLayout": "Stick",
+                    "continuous": true,
+                    "passThrough": false,
+                    "processors": "AxisDeadzone",
+                    "interactions": "",
+                    "bindings": []
+                },
+                {
+                    "name": "Action",
+                    "id": "a16a8e41-e39d-46bd-ae0d-4880fa0ac9e9",
+                    "expectedControlLayout": "Button",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "AxisDeadzone",
+                    "interactions": "Press",
+                    "bindings": []
+                },
+                {
+                    "name": "Dash",
+                    "id": "f2779e2f-b3bf-44fb-92de-89f6ff66ddc9",
                     "expectedControlLayout": "",
                     "continuous": false,
                     "passThrough": false,
-                    "processors": "",
-                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "interactions": "Press",
                     "bindings": []
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "88e4dc4b-dd3c-489a-92a4-2c85c78fcf0b",
-                    "path": "",
+                    "id": "91821bbe-2821-4715-a3f9-2160b31d74e6",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Move",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "76299832-9d7d-4fe2-a03d-8a54d39bc233",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Move",
+                    "chainWithPrevious": false,
+                    "isComposite": true,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "up",
+                    "id": "ee7b03ff-cf6e-4d28-a07d-e738c33df50e",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": true,
+                    "modifiers": ""
+                },
+                {
+                    "name": "down",
+                    "id": "3649cf69-72fc-46bd-9a73-c029f239cdea",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": true,
+                    "modifiers": ""
+                },
+                {
+                    "name": "left",
+                    "id": "e7f4a216-8616-46a9-a1e0-52a2d40480ce",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": true,
+                    "modifiers": ""
+                },
+                {
+                    "name": "right",
+                    "id": "d60c7d4f-8d95-4569-8bdb-785858c5009c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Move",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": true,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "3e46f17c-35aa-48a9-8665-3400bfb9c36f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Action",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "ac0023b7-3708-4b99-a96b-e037b74ba2b1",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Dash",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "7abfa52c-ea04-47a5-ab7c-f3e8d7bc468b",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Dash",
                     "chainWithPrevious": false,
                     "isComposite": false,
                     "isPartOfComposite": false,
@@ -33,5 +157,30 @@
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Gamepad",
+            "basedOn": "",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "basedOn": "",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }
