@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2645887257924490165}
   - component: {fileID: 2645887257924490167}
   - component: {fileID: 2645887257924490164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2645887258176564320}
   - component: {fileID: 2645887258176564322}
   - component: {fileID: 2645887258176564323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 6991289423319545791}
   - component: {fileID: 5173829727850351349}
   - component: {fileID: 5114567749377661671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Patron
   m_TagString: Patron
   m_Icon: {fileID: 0}
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatronSettings: {fileID: 11400000, guid: 28d16011f0d4e1f48a60d40a8f97bdf8, type: 2}
   Agent: {fileID: 5173829727850351349}
+  WalkArea: {fileID: 0}
 --- !u!195 &5173829727850351349
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -254,7 +255,7 @@ GameObject:
   - component: {fileID: 2645887258359714709}
   - component: {fileID: 2645887258359714706}
   - component: {fileID: 2645887258359714707}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

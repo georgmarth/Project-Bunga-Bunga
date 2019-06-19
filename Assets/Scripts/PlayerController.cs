@@ -11,12 +11,15 @@ public class PlayerController : MonoBehaviour
     public enum PlayerState { IDLE, INTERACTING, HOLDING }
 
     public float MovementForce = 50f;
+    public float StoppingForce = 2f;
     public float BoostForce = 100f;
     public float MaxSpeed = 5f;
     public float MaxBoostSpeed = 10f;
     public float BoostTime = .2f;
     public float BoostCooldown = 1f;
     public float RotationSpeed = 0.9f;
+    public float Gravity = -9.81f;
+
     public float RotationDeadZone = .05f;
     public float MovementDeadZone = .1f;
 
@@ -133,16 +136,19 @@ public class PlayerController : MonoBehaviour
         {
             // VELOCITY
             Vector3 movement = _movementInput * MovementForce;
-            rb.AddForce(movement, ForceMode.Acceleration);
+            float yComponent = rb.velocity.y;
+            yComponent += Gravity * Time.deltaTime;
+            Vector3 oldVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.velocity = oldVelocity + movement * Time.deltaTime;
 
             // stop force
             if (_movementInput.sqrMagnitude <= MovementDeadZone * MovementDeadZone)
             {
-                rb.AddForce(rb.velocity * -.2f, ForceMode.Acceleration);
+                rb.velocity += (rb.velocity * -StoppingForce * Time.deltaTime);
             }
 
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speedLimit);
-
+            rb.velocity = new Vector3(rb.velocity.x, yComponent, rb.velocity.z);
             // ROTATION
             if (_movementInput.sqrMagnitude >= RotationDeadZone * RotationDeadZone)
             {

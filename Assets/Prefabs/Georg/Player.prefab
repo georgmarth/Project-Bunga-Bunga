@@ -47,7 +47,7 @@ Rigidbody:
   m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -71,6 +71,7 @@ MonoBehaviour:
   BoostTime: 0.2
   BoostCooldown: 1
   RotationSpeed: 0.5
+  Gravity: -9.81
   RotationDeadZone: 0.05
   MovementDeadZone: 0.1
   State: 0
@@ -114,7 +115,7 @@ MonoBehaviour:
     m_ActionId: a16a8e41-e39d-46bd-ae0d-4880fa0ac9e9
     m_ActionName: 
   m_AutoSwitchControlScheme: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: '{9904b3c3-591a-4962-acbd-8731c2dce926}'
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
