@@ -12,6 +12,8 @@ public class Patron : MonoBehaviour
 
     public MeshRenderer WalkArea;
 
+    public Animator Animator;
+
     private int _completedTasks;
     private float _idleTimer;
     private PatronState _state;
@@ -28,19 +30,22 @@ public class Patron : MonoBehaviour
     private IEnumerator Idle()
     {
         _state = PatronState.IDLE;
+        Animator.SetBool("walking", false);
         for (int i = 0; i < PatronSettings.IdleLocations; i++)
         {
             var location = PickIdleLocation();
             Agent.enabled = true;
             Agent.SetDestination(location);
+            Animator.SetBool("walking", true);
             yield return new WaitForSeconds(Random.Range(PatronSettings.IdleWalkTime.x, PatronSettings.IdleWalkTime.y));
             Agent.enabled = false;
+            Animator.SetBool("walking", false);
             yield return new WaitForSeconds(Random.Range(PatronSettings.IdleTime.x, PatronSettings.IdleTime.y));
         }
 
         _desiredTask = PickTask();
         _state = PatronState.WALKING;
-
+        Animator.SetBool("walking", true);
         Agent.enabled = true;
         Agent.SetDestination(_desiredTask.Location.position);
     }

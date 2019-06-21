@@ -75,12 +75,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // INPUT
-        //float horizontal = Input.GetAxisRaw("Horizontal");
-        //float vertical = Input.GetAxisRaw("Vertical");
-        //_movementInput = Vector3.ClampMagnitude(new Vector3(horizontal, 0f, vertical), 1f);
-        //_boost = Input.GetButton("Fire2");
-
         if (Input.GetButtonDown("Fire1") && (State == PlayerState.IDLE || State == PlayerState.HOLDING ) && _currentLocation != null)
         {
             State = PlayerState.INTERACTING;
