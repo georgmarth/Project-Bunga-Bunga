@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     public PlayerInputManager PIM;
     public GameEvents GameEvents;
-    
+
     public void OnPlayerJoin(PlayerInput playerInput)
     {
         GameEvents.PlayerJoin(playerInput.gameObject);

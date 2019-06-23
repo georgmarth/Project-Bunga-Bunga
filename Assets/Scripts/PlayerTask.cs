@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Game Assets/PlayerTask")]
 public class PlayerTask : ScriptableObject
 {
     public string AnimationString;

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public enum PatronState { IDLE, WAITING, WALKING, ACTION}
 
+[RequireComponent(typeof(Rigidbody))]
 public class Patron : MonoBehaviour
 {
     public PatronSettings PatronSettings;
@@ -13,46 +14,120 @@ public class Patron : MonoBehaviour
     public MeshRenderer WalkArea;
 
     public Animator Animator;
+    public float WalkAnimThreshold = .05f;
 
-    private int _completedTasks;
-    private float _idleTimer;
-    private PatronState _state;
+    public PatronState State { get; private set; }
+
+    public PatronUI PatronUI;
 
     private PatronLocation _desiredTask;
+    private Rigidbody _rb;
+    private bool _fulfilled = false;
+    private int _completedTasks;
+    private int _animWalkId;
+    private int _animStopId;
 
-    private void Start()
+    private void Awake()
     {
-        
-        _idleTimer = Random.Range(PatronSettings.IdleTime.x, PatronSettings.IdleTime.y);
-        StartCoroutine(Idle());
+        _rb = GetComponent<Rigidbody>();
+        State = PatronState.IDLE;
+        StartCoroutine(PatronLoop());
+        _animWalkId = Animator.StringToHash("walk");
+        _animStopId = Animator.StringToHash("stop");
     }
 
-    private IEnumerator Idle()
+    private IEnumerator PatronLoop()
     {
-        _state = PatronState.IDLE;
-        Animator.SetBool("walking", false);
-        for (int i = 0; i < PatronSettings.IdleLocations; i++)
+        while (_completedTasks < PatronSettings.DesiredTasks)
         {
-            var location = PickIdleLocation();
+            _fulfilled = false;
+
+            // --- IDLE STATE ---
+
+            State = PatronState.IDLE;
+            for (int i = 0; i < PatronSettings.IdleLocations; i++)
+            {
+                var location = PickIdleLocation();
+                Agent.enabled = true;
+                Agent.SetDestination(location);
+                Animator.SetTrigger("walk");
+                yield return new WaitUntil(ReachedDestination);
+                Agent.enabled = false;
+                Animator.SetTrigger("stop");
+                yield return new WaitForSeconds(Random.Range(PatronSettings.IdleTime.x, PatronSettings.IdleTime.y));
+            }
+
+            // --- IDLE OVER ---
+
+            _desiredTask = PickTask();
+            State = PatronState.WALKING;
             Agent.enabled = true;
-            Agent.SetDestination(location);
-            Animator.SetBool("walking", true);
-            yield return new WaitForSeconds(Random.Range(PatronSettings.IdleWalkTime.x, PatronSettings.IdleWalkTime.y));
-            Agent.enabled = false;
-            Animator.SetBool("walking", false);
-            yield return new WaitForSeconds(Random.Range(PatronSettings.IdleTime.x, PatronSettings.IdleTime.y));
+            Agent.SetDestination(_desiredTask.Location.position);
+            Animator.SetTrigger("walk");
+            yield return new WaitUntil(ReachedDestination);
+
+            // --- WAIT STATE ---
+
+            State = PatronState.WAITING;
+            // play animation
+            Animator.SetTrigger("stop");
+            float patienceRemaining = PatronSettings.Patience;
+            float fulfillment = 0f;
+
+            // reset Overhead UI
+            PatronUI.SetPatienceActive(true);
+            PatronUI.SetPatience(0f);
+            PatronUI.SetFulfillmentActive(true);
+            PatronUI.SetFulfillment(0f);
+
+            while (patienceRemaining > 0f)
+            {
+                // set Overhead UI values
+                PatronUI.SetPatience(Mathf.InverseLerp(PatronSettings.Patience, 0, patienceRemaining));
+                PatronUI.SetFulfillment(Mathf.InverseLerp(0, _desiredTask.TaskLocation.Task.RequiredTime, fulfillment));
+
+                if (_desiredTask.TaskLocation.Performing)
+                {
+                    fulfillment += Time.deltaTime;
+                    if (fulfillment >= _desiredTask.TaskLocation.Task.RequiredTime)
+                    {
+                        _fulfilled = true;
+                        _completedTasks++;
+                        break;
+                    }
+                }
+                patienceRemaining -= Time.deltaTime;
+                yield return null;
+            }
+
+            // close Overhead UI
+            PatronUI.SetPatienceActive(false);
+            PatronUI.SetFulfillmentActive(false);
+
+            _desiredTask.Reserved = false;
+            _desiredTask = null;
+
+            // --- WAIT OVER ---
+
+            if (!_fulfilled)
+            {
+                break;
+            }
         }
 
-        _desiredTask = PickTask();
-        _state = PatronState.WALKING;
-        Animator.SetBool("walking", true);
-        Agent.enabled = true;
-        Agent.SetDestination(_desiredTask.Location.position);
+        if (_fulfilled)
+        {
+            // leave fulfilled
+        }
+        else
+        {
+            // leave frustrated
+        }
     }
 
-    private void Update()
+    private bool ReachedDestination()
     {
-        
+        return (Agent.destination - _rb.position).sqrMagnitude < Agent.stoppingDistance;
     }
 
     private PatronLocation PickTask()

@@ -22,7 +22,7 @@
                     "continuous": false,
                     "passThrough": false,
                     "processors": "AxisDeadzone",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=2)",
                     "bindings": []
                 },
                 {
@@ -122,6 +122,19 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
+                    "action": "Action",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "5fe78c39-3872-4ad0-b626-e91b5e3a7c81",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
                     "action": "Action",
                     "chainWithPrevious": false,
                     "isComposite": false,

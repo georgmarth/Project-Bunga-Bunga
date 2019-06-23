@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Input;
 using UnityEngine.Experimental.Input.Plugins.PlayerInput;
 
-
+[RequireComponent(typeof(Rigidbody),typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
     public enum PlayerState { IDLE, INTERACTING, HOLDING }
@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
 
     public PlayerState State;
 
-    private Rigidbody rb;
+    private Rigidbody _rb;
+    private PlayerInput _pi;
     private Vector3 _movementInput;
     private float _speedLimit;
 
@@ -37,15 +38,45 @@ public class PlayerController : MonoBehaviour
 
     private TaskLocation _currentLocation;
 
-    void Start()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
+        _pi = GetComponent<PlayerInput>();
         State = PlayerState.IDLE;
         _speedLimit = MaxSpeed;
 
         _boostTimeWait = new WaitForSeconds(BoostTime);
         _boostCooldownWait = new WaitForSeconds(BoostCooldown);
         _dashing = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (State == PlayerState.IDLE)
+        {
+            // VELOCITY
+            Vector3 movement = _movementInput * MovementForce;
+            float yComponent = _rb.velocity.y;
+            yComponent += Gravity * Time.deltaTime;
+            Vector3 oldVelocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+            _rb.velocity = oldVelocity + movement * Time.deltaTime;
+
+            // stop force
+            if (_movementInput.sqrMagnitude <= MovementDeadZone * MovementDeadZone)
+            {
+                _rb.velocity += (_rb.velocity * -StoppingForce * Time.deltaTime);
+            }
+
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _speedLimit);
+            _rb.velocity = new Vector3(_rb.velocity.x, yComponent, _rb.velocity.z);
+            // ROTATION
+            if (_movementInput.sqrMagnitude >= RotationDeadZone * RotationDeadZone)
+            {
+                Vector3 lookDirection = _movementInput.normalized;
+
+                _rb.MoveRotation(Quaternion.Slerp(_rb.rotation, Quaternion.LookRotation(lookDirection, Vector3.up), RotationSpeed));
+            }
+        }
     }
 
     public void OnMove(InputValue value)
@@ -62,43 +93,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnAction(InputValue inputValue)
+    {
+        if (inputValue.isPressed && _currentLocation != null)
+        {
+            State = PlayerState.INTERACTING;
+            _currentLocation.Performing = true;
+            _rb.isKinematic = true;
+        }
+        else if (!inputValue.isPressed && State == PlayerState.INTERACTING)
+        {
+            State = PlayerState.IDLE;
+            _currentLocation.Performing = false;
+            _rb.isKinematic = false;
+        }
+    }
+
     private IEnumerator DashRoutine()
     {
         _dashing = true;
-        rb.AddForce(transform.forward * BoostForce, ForceMode.Impulse);
+        _rb.AddForce(transform.forward * BoostForce, ForceMode.Impulse);
         _speedLimit = MaxBoostSpeed;
         yield return _boostTimeWait;
         _speedLimit = MaxSpeed;
         yield return _boostCooldownWait;
         _dashing = false;
-    }
-
-    void Update()
-    {
-        if (Input.GetButtonDown("Fire1") && (State == PlayerState.IDLE || State == PlayerState.HOLDING ) && _currentLocation != null)
-        {
-            State = PlayerState.INTERACTING;
-            PerformTask();
-        }
-    }
-
-    private void PerformTask()
-    {
-        StartCoroutine(TestPerform());
-    }
-
-
-    private IEnumerator TestPerform()
-    {
-        rb.isKinematic = true;
-        yield return new WaitForSeconds(1f);
-        State = PlayerState.IDLE;
-        rb.isKinematic = false;
-        for (int i = 0; i < _currentLocation.PatronLocations.Length; i++)
-        {
-            // task complete
-            //_currentLocation.PatronLocations[i].Patron
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -121,35 +140,6 @@ public class PlayerController : MonoBehaviour
         if (_currentLocation == location)
         {
             _currentLocation = null;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (State == PlayerState.IDLE)
-        {
-            // VELOCITY
-            Vector3 movement = _movementInput * MovementForce;
-            float yComponent = rb.velocity.y;
-            yComponent += Gravity * Time.deltaTime;
-            Vector3 oldVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-            rb.velocity = oldVelocity + movement * Time.deltaTime;
-
-            // stop force
-            if (_movementInput.sqrMagnitude <= MovementDeadZone * MovementDeadZone)
-            {
-                rb.velocity += (rb.velocity * -StoppingForce * Time.deltaTime);
-            }
-
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speedLimit);
-            rb.velocity = new Vector3(rb.velocity.x, yComponent, rb.velocity.z);
-            // ROTATION
-            if (_movementInput.sqrMagnitude >= RotationDeadZone * RotationDeadZone)
-            {
-                Vector3 lookDirection = _movementInput.normalized;
-
-                rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(lookDirection, Vector3.up), RotationSpeed));
-            }
         }
     }
 }
