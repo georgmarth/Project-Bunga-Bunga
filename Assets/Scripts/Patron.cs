@@ -10,13 +10,10 @@ public class Patron : MonoBehaviour
 {
     public PatronSettings PatronSettings;
     public NavMeshAgent Agent;
-
     public MeshRenderer WalkArea;
-
     public Animator Animator;
-    public float WalkAnimThreshold = .05f;
-
     public PatronState State { get; private set; }
+    public GameEvents GameEvents;
 
     public PatronUI PatronUI;
 
@@ -26,14 +23,20 @@ public class Patron : MonoBehaviour
     private int _completedTasks;
     private int _animWalkId;
     private int _animStopId;
+    private Vector3 _spawnLocation;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         State = PatronState.IDLE;
-        StartCoroutine(PatronLoop());
         _animWalkId = Animator.StringToHash("walk");
         _animStopId = Animator.StringToHash("stop");
+    }
+
+    private void Start()
+    {
+        _spawnLocation = transform.position;
+        StartCoroutine(PatronLoop());
     }
 
     private IEnumerator PatronLoop()
@@ -71,6 +74,7 @@ public class Patron : MonoBehaviour
             State = PatronState.WAITING;
             // play animation
             Animator.SetTrigger("stop");
+            // init variables for loop
             float patienceRemaining = PatronSettings.Patience;
             float fulfillment = 0f;
 
@@ -114,6 +118,10 @@ public class Patron : MonoBehaviour
                 break;
             }
         }
+        Agent.enabled = true;
+        Agent.SetDestination(_spawnLocation);
+        Animator.SetTrigger("walk");
+        yield return new WaitUntil(ReachedDestination);
 
         if (_fulfilled)
         {
@@ -123,6 +131,9 @@ public class Patron : MonoBehaviour
         {
             // leave frustrated
         }
+
+        GameEvents.PatronLeft?.Invoke(this);
+        Destroy(gameObject, .5f);
     }
 
     private bool ReachedDestination()

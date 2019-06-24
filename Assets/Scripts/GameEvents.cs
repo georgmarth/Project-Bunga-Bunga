@@ -16,7 +16,12 @@ public class GameEvents : ScriptableObject
     public Action Unpause;
     public Action<float> LevelTimer;
 
+    public Action<Patron> PatronSpawned;
+    public Action<Patron> PatronLeft;
+
     public Action<Patron> TaskFulfilled;
+
+    public Func<Camera> GetCamera;
 
     public void PlayerJoin(GameObject gameObject)
     {
