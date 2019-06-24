@@ -33,7 +33,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0.887, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.887
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -454,7 +454,7 @@ MonoBehaviour:
   Agent: {fileID: 5173829727850351349}
   WalkArea: {fileID: 0}
   Animator: {fileID: 4214696529173152789}
-  WalkAnimThreshold: 0.05
+  GameEvents: {fileID: 0}
   PatronUI: {fileID: 1115451798328123216}
 --- !u!195 &5173829727850351349
 NavMeshAgent:
@@ -637,8 +637,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6495575863573622067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.30070576, y: -0, z: -0, w: 0.953717}
+  m_LocalPosition: {x: 0, y: 0, z: -0.3338213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5206452514452102783}
@@ -648,7 +648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 1.8947465}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8434836556287157519
@@ -708,6 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatienceSlider: {fileID: 1880392522490179173}
   FulfillmentSlider: {fileID: 6297989580589618644}
+  CanvasRotation: {x: 40, y: 0, z: 0}
 --- !u!1 &6960202256198481406
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +810,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e9aa1fe8bac7af846ba509c743ae14b1, type: 2}
+    - target: {fileID: -6057140222963153312, guid: fc6144b7361380649b3acc91f3e8c1fe,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: fc6144b7361380649b3acc91f3e8c1fe,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -7,11 +7,12 @@ public class PatronUI : MonoBehaviour
 {
     public Slider PatienceSlider;
     public Slider FulfillmentSlider;
+    public Vector3 CanvasRotation;
 
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.Euler(CanvasRotation);
     }
 
     public void SetPatienceActive(bool value)

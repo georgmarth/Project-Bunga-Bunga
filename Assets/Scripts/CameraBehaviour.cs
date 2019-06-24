@@ -13,11 +13,14 @@ public class CameraBehaviour : MonoBehaviour
     public GameEvents GameEvents;
 
     private Vector3 _currentVelocity;
+    private Camera _camera;
 
     private void Awake()
     {
+        _camera = GetComponent<Camera>();
         GameEvents.PlayerJoined += AddTracked;
         GameEvents.PlayerLeft += RemoveTracked;
+        GameEvents.GetCamera += () => _camera;
     }
 
     // Start is called before the first frame update
