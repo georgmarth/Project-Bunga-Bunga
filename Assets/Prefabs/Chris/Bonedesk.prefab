@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3570843862637630460}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.056, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 564487389805053225}
@@ -69,7 +69,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4073949887890743113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.031, z: -0.025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 564487388562235887}
@@ -85,10 +85,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.38341334
-  m_Height: 1.1830392
+  m_Radius: 0.43
+  m_Height: 1.38
   m_Direction: 2
-  m_Center: {x: -0.06375384, y: -0.03629449, z: 0.18669903}
+  m_Center: {x: -0.06375384, y: -0.07, z: 0.18669903}
 --- !u!1 &5352538579528859417
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +173,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (12)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -243,11 +248,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.028256115
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (12)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &7097166088921672978 stripped
@@ -263,6 +263,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (7)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -333,11 +338,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.031075267
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (7)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487388537460483 stripped
@@ -353,6 +353,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (8)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -423,11 +428,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.0268335
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (8)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487388796147530 stripped
@@ -443,6 +443,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (3)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -513,11 +518,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.031075288
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (3)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487388856000895 stripped
@@ -533,6 +533,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (2)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -603,11 +608,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.031075288
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487388974516798 stripped
@@ -623,6 +623,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (6)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -693,11 +698,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.031075288
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (6)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487389461690507 stripped
@@ -713,6 +713,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (5)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -783,11 +788,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.031075258
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (5)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487389622383524 stripped
@@ -803,6 +803,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -873,11 +878,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.03107527
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487389805053225 stripped
@@ -893,6 +893,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (10)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -963,11 +968,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.024860222
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (10)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487389939819957 stripped
@@ -983,6 +983,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (4)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1053,11 +1058,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.03107528
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (4)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487390292997229 stripped
@@ -1073,6 +1073,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (9)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1143,11 +1148,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.024860222
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (9)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
 --- !u!4 &564487390437688791 stripped
@@ -1163,6 +1163,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564487388562235887}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
+        type: 3}
+      propertyPath: m_Name
+      value: Smallbone (11)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c0b1a20539e1346922a690dec0653c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1232,11 +1237,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.028256124
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 89c0b1a20539e1346922a690dec0653c,
-        type: 3}
-      propertyPath: m_Name
-      value: Smallbone (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c0b1a20539e1346922a690dec0653c, type: 3}
