@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerInputManager PIM;
     public GameEvents GameEvents;
 
+    private int playerCount = 0;
+
     private void Awake()
     {
         GameEvents.GameStarted += OnGameStart;
@@ -15,6 +17,8 @@ public class PlayerManager : MonoBehaviour
 
     public void OnPlayerJoin(PlayerInput playerInput)
     {
+        playerInput.GetComponent<PlayerController>().PlayerIndex = playerCount;
+        playerCount++;
         GameEvents.PlayerJoin(playerInput.gameObject);
     }
 

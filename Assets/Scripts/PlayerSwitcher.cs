@@ -4,27 +4,60 @@ using UnityEngine;
 
 public class PlayerSwitcher : MonoBehaviour
 {
-    public GameObject[] ModelPrefabs;
-
-    public GameObject CurrentModel;
-    private int _index = 0;
-
-    public Animator Switch(bool right)
+    [System.Serializable]
+    public class Option
     {
-        _index = (_index + (right ? 1 : -1) + ModelPrefabs.Length) % ModelPrefabs.Length;
-        var parent = CurrentModel.transform.parent;
-        Vector3 position = CurrentModel.transform.position;
-        Quaternion rotation = CurrentModel.transform.rotation;
-        int layer = CurrentModel.layer;
-        Destroy(CurrentModel);
-        CurrentModel = Instantiate(ModelPrefabs[_index], position, rotation, parent);
-        // set preview layer
-        CurrentModel.gameObject.layer = layer;
-        foreach (var transform in CurrentModel.GetComponentsInChildren<Transform>(true))
+        public string Name;
+        public GameObject[] Objects;
+    }
+
+    public GameEvents GameEvents;
+    public Option[] Options;
+
+    public int CurrentList { get; private set; }
+    private int[] _selection;
+
+    public int PlayerIndex = 0;
+
+    private void Awake()
+    {
+        CurrentList = 0;
+
+        _selection = new int[Options.Length];
+        for (int i = 0; i < _selection.Length; i++)
         {
-            transform.gameObject.layer = layer;
+            _selection[i] = 0;
         }
-        //return CurrentModel.GetComponent<Animator>();
-        return null;
+    }
+
+    public void Shuffle()
+    {
+        for (int i = 0; i < Options.Length; i++)
+        {
+            _selection[i] = Random.Range(0, Options[i].Objects.Length);
+            for (int j = 0; j < Options[i].Objects.Length; j++)
+            {
+                Options[i].Objects[j].SetActive(j == _selection[i]);
+            }
+        }
+        GameEvents.OutfitListSwitched?.Invoke(PlayerIndex, Options[CurrentList].Name);
+    }
+
+    public void Switch(bool right)
+    {
+        // deactivate old selection
+        Options[CurrentList].Objects[_selection[CurrentList]]?.SetActive(false);
+        // switch enumator
+        int inc = (right ? 1 : -1);
+        int length = Options[CurrentList].Objects.Length;
+        _selection[CurrentList] = (_selection[CurrentList] + inc + length) % length;
+        // activate new selection
+        Options[CurrentList].Objects[_selection[CurrentList]]?.SetActive(true);
+    }
+
+    public void SwitchOption(bool up)
+    {
+        CurrentList = (CurrentList + (up ? 1 : -1) + Options.Length) % Options.Length;
+        GameEvents.OutfitListSwitched?.Invoke(PlayerIndex, Options[CurrentList].Name);
     }
 }

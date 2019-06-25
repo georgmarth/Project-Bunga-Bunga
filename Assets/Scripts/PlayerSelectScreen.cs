@@ -14,6 +14,7 @@ public class PlayerSelectScreen : MonoBehaviour
     private void Awake()
     {
         GameEvents.PlayerJoined += OnPlayerJoin;
+        GameEvents.OutfitListSwitched += OnPlayerOutfitSwitched;
     }
 
     private void OnPlayerJoin(GameObject playerObject)
@@ -33,6 +34,11 @@ public class PlayerSelectScreen : MonoBehaviour
         }
 
         _currentPlayer++;
+    }
+
+    private void OnPlayerOutfitSwitched(int playerIndex, string category)
+    {
+        PlayerSelectStrips[playerIndex]?.SetSelectionText(category);
     }
 
     private void OnDestroy()

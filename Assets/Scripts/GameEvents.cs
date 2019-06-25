@@ -25,6 +25,8 @@ public class GameEvents : ScriptableObject
 
     public Action<Patron> TaskFulfilled;
 
+    public Action<int, string> OutfitListSwitched;
+
     public Func<Camera> GetCamera;
 
     public void OnEnable()

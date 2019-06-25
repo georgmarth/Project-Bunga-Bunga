@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Input;
 using UnityEngine.Experimental.Input.Plugins.PlayerInput;
 
-[RequireComponent(typeof(Rigidbody),typeof(PlayerInput))]
+[RequireComponent(typeof(Rigidbody), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
     public GameEvents GameEvents;
@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
 
     public PlayerState State;
 
-    private PlayerSwitcher _playerSwitcher;
+    public PlayerSwitcher PlayerSwitcher;
+
+    public int PlayerIndex { get; set; }
 
     private Rigidbody _rb;
     private PlayerInput _pi;
@@ -46,7 +48,6 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _pi = GetComponent<PlayerInput>();
-        _playerSwitcher = GetComponent<PlayerSwitcher>();
         State = PlayerState.IDLE;
         _speedLimit = MaxSpeed;
 
@@ -59,7 +60,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        
+        PlayerSwitcher.PlayerIndex = PlayerIndex;
+        PlayerSwitcher.Shuffle();
     }
 
     private void FixedUpdate()
@@ -127,12 +129,22 @@ public class PlayerController : MonoBehaviour
 
     public void OnSwitchOutfitLeft()
     {
-        _playerSwitcher.Switch(false);
+        PlayerSwitcher.Switch(false);
     }
 
     public void OnSwitchOutfitRight()
     {
-        _playerSwitcher.Switch(true);
+        PlayerSwitcher.Switch(true);
+    }
+
+    public void OnSwitchOutfitUp()
+    {
+        PlayerSwitcher.SwitchOption(true);
+    }
+
+    public void OnSwitchOutfitDown()
+    {
+        PlayerSwitcher.SwitchOption(false);
     }
 
     public void OnStartGame()
