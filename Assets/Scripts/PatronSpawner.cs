@@ -26,11 +26,6 @@ public class PatronSpawner : MonoBehaviour
         _spawnWait = new WaitForSeconds(SpawnRate);
     }
 
-    private void Start()
-    {
-        //GameEvents.GameStarted?.Invoke();
-    }
-
     public void OnGameStart()
     {
         _wave = StartCoroutine(SpawnWave());

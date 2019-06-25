@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     public PlayerState State;
 
+    private PlayerSwitcher _playerSwitcher;
+
     private Rigidbody _rb;
     private PlayerInput _pi;
     private Vector3 _movementInput;
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _pi = GetComponent<PlayerInput>();
+        _playerSwitcher = GetComponent<PlayerSwitcher>();
         State = PlayerState.IDLE;
         _speedLimit = MaxSpeed;
 
@@ -124,12 +127,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnSwitchOutfitLeft()
     {
-        Debug.Log("switch left");
+        _playerSwitcher.Switch(false);
     }
 
     public void OnSwitchOutfitRight()
     {
-        Debug.Log("switch right");
+        _playerSwitcher.Switch(true);
     }
 
     public void OnStartGame()

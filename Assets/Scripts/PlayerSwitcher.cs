@@ -11,13 +11,20 @@ public class PlayerSwitcher : MonoBehaviour
 
     public Animator Switch(bool right)
     {
-        _index += right ? 1 : -1;
-        _index %= ModelPrefabs.Length;
+        _index = (_index + (right ? 1 : -1) + ModelPrefabs.Length) % ModelPrefabs.Length;
         var parent = CurrentModel.transform.parent;
         Vector3 position = CurrentModel.transform.position;
         Quaternion rotation = CurrentModel.transform.rotation;
+        int layer = CurrentModel.layer;
         Destroy(CurrentModel);
         CurrentModel = Instantiate(ModelPrefabs[_index], position, rotation, parent);
-        return CurrentModel.GetComponent<Animator>();
+        // set preview layer
+        CurrentModel.gameObject.layer = layer;
+        foreach (var transform in CurrentModel.GetComponentsInChildren<Transform>(true))
+        {
+            transform.gameObject.layer = layer;
+        }
+        //return CurrentModel.GetComponent<Animator>();
+        return null;
     }
 }

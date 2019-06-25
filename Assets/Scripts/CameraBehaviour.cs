@@ -48,7 +48,7 @@ public class CameraBehaviour : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (Tracked.Count > 0)
+        if (Tracked.Count > 0 && GameEvents.GameState == GameState.RUNNING)
         {
             Vector2 minMaxHorizontal, minMaxVertical;
             minMaxHorizontal = minMaxVertical = new Vector2(float.MaxValue, float.MinValue);
