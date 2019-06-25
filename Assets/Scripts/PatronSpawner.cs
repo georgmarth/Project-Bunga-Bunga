@@ -28,7 +28,7 @@ public class PatronSpawner : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.GameStarted?.Invoke();
+        //GameEvents.GameStarted?.Invoke();
     }
 
     public void OnGameStart()

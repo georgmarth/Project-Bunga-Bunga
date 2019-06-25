@@ -8,7 +8,9 @@ using UnityEngine.Experimental.Input.Plugins.PlayerInput;
 [RequireComponent(typeof(Rigidbody),typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    public enum PlayerState { IDLE, INTERACTING, HOLDING }
+    public GameEvents GameEvents;
+
+    public enum PlayerState { IDLE, INTERACTING, HOLDING, PLAYERSELECT }
 
     public float MovementForce = 50f;
     public float StoppingForce = 2f;
@@ -48,6 +50,13 @@ public class PlayerController : MonoBehaviour
         _boostTimeWait = new WaitForSeconds(BoostTime);
         _boostCooldownWait = new WaitForSeconds(BoostCooldown);
         _dashing = false;
+
+        GameEvents.GameStarted += OnGameStarted;
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void FixedUpdate()
@@ -79,6 +88,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // -- MOVEMENT --
+
     public void OnMove(InputValue value)
     {
         var v = value.Get<Vector2>();
@@ -107,6 +118,28 @@ public class PlayerController : MonoBehaviour
             _currentLocation.Performing = false;
             _rb.isKinematic = false;
         }
+    }
+
+    // -- CHARACTER SELECTION
+
+    public void OnSwitchOutfitLeft()
+    {
+        Debug.Log("switch left");
+    }
+
+    public void OnSwitchOutfitRight()
+    {
+        Debug.Log("switch right");
+    }
+
+    public void OnStartGame()
+    {
+        GameEvents.StartGame();
+    }
+
+    private void OnGameStarted()
+    {
+        _pi.SwitchActions("CharacterAction");
     }
 
     private IEnumerator DashRoutine()

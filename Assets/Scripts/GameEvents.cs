@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum GameState { PLAYER_SELECT, RUNNING, PAUSED, GAMEOVER }
+
 [CreateAssetMenu(menuName = "Game Assets/GameEvents")]
 public class GameEvents : ScriptableObject
 {
+    public GameState GameState = GameState.PLAYER_SELECT;
+
     public Action<GameObject> PlayerJoined;
     public Action<GameObject> PlayerLeft;
 
@@ -23,6 +27,11 @@ public class GameEvents : ScriptableObject
 
     public Func<Camera> GetCamera;
 
+    public void OnEnable()
+    {
+        GameState = GameState.PLAYER_SELECT;
+    }
+
     public void PlayerJoin(GameObject gameObject)
     {
         PlayerJoined?.Invoke(gameObject);
@@ -31,5 +40,32 @@ public class GameEvents : ScriptableObject
     public void PlayerLeave(GameObject gameObject)
     {
         PlayerLeft?.Invoke(gameObject);
-    }    
+    }
+
+    public void StartGame()
+    {
+        if (GameState == GameState.PLAYER_SELECT)
+        {
+            GameState = GameState.RUNNING;
+            GameStarted?.Invoke();
+        }
+    }
+
+    public void PauseGame()
+    {
+        if (GameState == GameState.RUNNING)
+        {
+            GameState = GameState.PAUSED;
+            Pause?.Invoke();
+        }
+    }
+
+    public void UnpauseGame()
+    {
+        if (GameState == GameState.PAUSED)
+        {
+            GameState = GameState.RUNNING;
+            Unpause?.Invoke();
+        }
+    }
 }

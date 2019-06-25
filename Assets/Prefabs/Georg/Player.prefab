@@ -64,7 +64,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83590d46e64344e4caa466ca758a3a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameEvents: {fileID: 11400000, guid: d2f54dd946b95f04296d7c24f48763c1, type: 2}
   MovementForce: 50
+  StoppingForce: 2
   BoostForce: 300
   MaxSpeed: 5
   MaxBoostSpeed: 10
@@ -116,7 +118,7 @@ MonoBehaviour:
     m_ActionName: 
   m_AutoSwitchControlScheme: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: '{9904b3c3-591a-4962-acbd-8731c2dce926}'
+  m_DefaultActionMap: '{256ff0d9-15d3-4c63-9b0f-2b3f62c1d9f3}'
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &6320595537773233090
