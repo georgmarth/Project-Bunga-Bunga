@@ -9,6 +9,26 @@ public class TaskLocation : MonoBehaviour
     public Transform[] Locations;
 
     public bool Performing = false;
+
+    public float UseLeft;
+
+    private void Awake()
+    {
+        UseLeft = Task.MaxUseTime;
+    }
+
+    private void Update()
+    {
+        if (Performing)
+        {
+            UseLeft = Mathf.Clamp(UseLeft - Time.deltaTime, 0f, Task.MaxUseTime);
+        }
+    }
+
+    public void FillUp()
+    {
+        UseLeft = Task.MaxUseTime;
+    }
 }
 
 [System.Serializable]

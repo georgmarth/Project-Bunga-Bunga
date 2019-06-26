@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1763013241890518524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5894384944509819956}
+  m_Layer: 9
+  m_Name: HoldingHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5894384944509819956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763013241890518524}
+  m_LocalRotation: {x: 0.8700462, y: 0.26846483, z: -0.085840255, w: 0.40444756}
+  m_LocalPosition: {x: 0.00117, y: 0.00066, z: -0.00031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4178169619757236122}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 48.579002, y: -185.881, z: -216.95299}
 --- !u!1 &6320595536693363438
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameEvents: {fileID: 11400000, guid: d2f54dd946b95f04296d7c24f48763c1, type: 2}
   MovementForce: 50
-  StoppingForce: 2
+  StoppingForce: 10
   BoostForce: 300
   MaxSpeed: 5
   MaxBoostSpeed: 10
@@ -77,6 +107,8 @@ MonoBehaviour:
   MovementDeadZone: 0.1
   State: 0
   PlayerSwitcher: {fileID: 7863331601547283241}
+  Animator: {fileID: 8122661358843809630}
+  HoldingHand: {fileID: 5894384944509819956}
 --- !u!114 &295469812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +285,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ac4a4d098aabf459ec08349308ac9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8122661358843809630 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 861960639300071444, guid: c1725767d1c449c40b530d79c37854da,
+    type: 3}
+  m_PrefabInstance: {fileID: 8885375402994057034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4178169619757236122 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4806720672107675856, guid: c1725767d1c449c40b530d79c37854da,
+    type: 3}
+  m_PrefabInstance: {fileID: 8885375402994057034}
+  m_PrefabAsset: {fileID: 0}

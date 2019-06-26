@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float BoostCooldown = 1f;
     public float RotationSpeed = 0.9f;
     public float Gravity = -9.81f;
+    public float MaxCarrySpeed = 3f;
 
     public float RotationDeadZone = .05f;
     public float MovementDeadZone = .1f;
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public PlayerState State;
 
     public PlayerSwitcher PlayerSwitcher;
+    public Animator Animator;
+    public Transform HoldingHand;
 
     public int PlayerIndex { get; set; }
 
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private WaitForSeconds _boostCooldownWait;
 
     private TaskLocation _currentLocation;
+    private Pickup _currentPickup;
 
     void Awake()
     {
@@ -66,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (State == PlayerState.IDLE)
+        if (State == PlayerState.IDLE || State == PlayerState.HOLDING)
         {
             // VELOCITY
             Vector3 movement = _movementInput * MovementForce;
@@ -81,8 +85,13 @@ public class PlayerController : MonoBehaviour
                 _rb.velocity += (_rb.velocity * -StoppingForce * Time.deltaTime);
             }
 
-            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _speedLimit);
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, State == PlayerState.IDLE ? _speedLimit : MaxCarrySpeed);
+
+            float sqrSpeedLimit = State == PlayerState.IDLE ? (_speedLimit * _speedLimit) : (MaxCarrySpeed * MaxCarrySpeed);
+            Animator.SetFloat("walkspeed", _rb.velocity.sqrMagnitude / sqrSpeedLimit);
+
             _rb.velocity = new Vector3(_rb.velocity.x, yComponent, _rb.velocity.z);
+
             // ROTATION
             if (_movementInput.sqrMagnitude >= RotationDeadZone * RotationDeadZone)
             {
@@ -103,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash()
     {
-        if (!_dashing)
+        if (!_dashing && State == PlayerState.IDLE)
         {
             _dashRoutine = StartCoroutine(DashRoutine());
         }
@@ -111,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAction(InputValue inputValue)
     {
-        if (inputValue.isPressed && _currentLocation != null)
+        if (inputValue.isPressed && _currentLocation != null && State == PlayerState.IDLE)
         {
             State = PlayerState.INTERACTING;
             _currentLocation.Performing = true;
@@ -122,6 +131,14 @@ public class PlayerController : MonoBehaviour
             State = PlayerState.IDLE;
             _currentLocation.Performing = false;
             _rb.isKinematic = false;
+        }
+        else if (inputValue.isPressed && _currentPickup != null && State == PlayerState.IDLE)
+        {
+            _currentPickup.Take();
+            _currentPickup.transform.SetPositionAndRotation(HoldingHand.position, HoldingHand.rotation);
+            _currentPickup.transform.SetParent(HoldingHand);
+            State = PlayerState.HOLDING;
+            Animator.SetTrigger("lift");
         }
     }
 
@@ -170,24 +187,43 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        TaskLocation location = other.GetComponent<TaskLocation>();
-        if (location == null)
+        if (other.tag == "TaskLocation")
         {
-            return;
+            TaskLocation location = other.GetComponent<TaskLocation>();
+            if (location != null)
+            {
+                _currentLocation = location;
+            }
         }
-        _currentLocation = location;
+
+        else if (other.tag == "Pickup")
+        {
+            _currentPickup = other.GetComponent<Pickup>();
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        TaskLocation location = other.GetComponent<TaskLocation>();
-        if (location == null)
+        if (other.tag == "TaskLocation")
         {
-            return;
+            TaskLocation location = other.GetComponent<TaskLocation>();
+            if (location == null)
+            {
+                return;
+            }
+            if (_currentLocation == location)
+            {
+                _currentLocation = null;
+            }
         }
-        if (_currentLocation == location)
+        else if (other.tag == "Pickup")
         {
-            _currentLocation = null;
+            var pickup = other.GetComponent<Pickup>();
+            if (_currentPickup == pickup)
+            {
+                _currentPickup = null;
+            }
         }
     }
 }
