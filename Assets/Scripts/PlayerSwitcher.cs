@@ -19,6 +19,8 @@ public class PlayerSwitcher : MonoBehaviour
 
     public int PlayerIndex = 0;
 
+    public bool ShuffleOnStart = false;
+
     private void Awake()
     {
         CurrentList = 0;
@@ -28,6 +30,12 @@ public class PlayerSwitcher : MonoBehaviour
         {
             _selection[i] = 0;
         }
+    }
+
+    private void Start()
+    {
+        if (ShuffleOnStart)
+            Shuffle();
     }
 
     public void Shuffle()

@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1763013241890518524
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5894384944509819956}
-  m_Layer: 9
-  m_Name: HoldingHand
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5894384944509819956
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763013241890518524}
-  m_LocalRotation: {x: 0.8700462, y: 0.26846483, z: -0.085840255, w: 0.40444756}
-  m_LocalPosition: {x: 0.00117, y: 0.00066, z: -0.00031}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4178169619757236122}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 48.579002, y: -185.881, z: -216.95299}
 --- !u!1 &6320595536693363438
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,12 +73,13 @@ MonoBehaviour:
   BoostCooldown: 1
   RotationSpeed: 0.5
   Gravity: -9.81
+  MaxCarrySpeed: 3
   RotationDeadZone: 0.05
   MovementDeadZone: 0.1
   State: 0
   PlayerSwitcher: {fileID: 7863331601547283241}
   Animator: {fileID: 8122661358843809630}
-  HoldingHand: {fileID: 5894384944509819956}
+  HoldingHand: {fileID: 3063079118575707006}
 --- !u!114 &295469812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,11 +176,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6320595536693363433}
     m_Modifications:
-    - target: {fileID: 1263069046038796334, guid: c1725767d1c449c40b530d79c37854da,
-        type: 3}
-      propertyPath: m_Name
-      value: Model
-      objectReference: {fileID: 0}
     - target: {fileID: 760062165310262523, guid: c1725767d1c449c40b530d79c37854da,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -265,6 +231,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1263069046038796334, guid: c1725767d1c449c40b530d79c37854da,
+        type: 3}
+      propertyPath: m_Name
+      value: Model
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1725767d1c449c40b530d79c37854da, type: 3}
 --- !u!4 &8197529170003915697 stripped
@@ -291,9 +262,9 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 8885375402994057034}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4178169619757236122 stripped
+--- !u!4 &3063079118575707006 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4806720672107675856, guid: c1725767d1c449c40b530d79c37854da,
+  m_CorrespondingSourceObject: {fileID: 5894384944509819956, guid: c1725767d1c449c40b530d79c37854da,
     type: 3}
   m_PrefabInstance: {fileID: 8885375402994057034}
   m_PrefabAsset: {fileID: 0}
