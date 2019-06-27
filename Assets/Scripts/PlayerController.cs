@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
 
     public int PlayerIndex { get; set; }
 
+    public AudioSource AudioSource;
+    public AudioClip DashClip;
+
     private Rigidbody _rb;
     private PlayerInput _pi;
     private Vector3 _movementInput;
@@ -143,7 +146,8 @@ public class PlayerController : MonoBehaviour
                 // hold item if the task has one
                 if (_currentLocation.Task.ItemtoHold != null)
                 {
-                    Instantiate(_currentLocation.Task.ItemtoHold, HoldingHand);
+                    var item = Instantiate(_currentLocation.Task.ItemtoHold, HoldingHand.position, HoldingHand.rotation);
+                    item.transform.parent = HoldingHand;
                 }
                 if (_currentLocation.Task.Synchronized)
                 {
@@ -284,6 +288,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DashRoutine()
     {
+        AudioSource.clip = DashClip;
+        AudioSource.Play();
         _dashing = true;
         _rb.AddForce(transform.forward * BoostForce, ForceMode.Impulse);
         _speedLimit = MaxBoostSpeed;

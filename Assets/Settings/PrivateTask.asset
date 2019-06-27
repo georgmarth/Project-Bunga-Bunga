@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8e62c7a1a1b2b469046b369efc2587, type: 3}
   m_Name: PrivateTask
   m_EditorClassIdentifier: 
-  AnimationStrings: []
-  RequiredPlayerCount: 0
-  RequiredTime: 0
+  AnimationStrings:
+  - privatedance
+  RequiredPlayerCount: 1
+  RequiredTime: 5
   ItemtoHold: {fileID: 0}
   Synchronized: 0
   AnimationTime: 0
   RequiresPot: 0
   PotString: 
-  PatronString: 
+  PatronString: chair
   MaxUseTime: 0

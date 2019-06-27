@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8e62c7a1a1b2b469046b369efc2587, type: 3}
   m_Name: BarTask
   m_EditorClassIdentifier: 
-  AnimationStrings: []
-  RequiredPlayerCount: 0
-  RequiredTime: 0
-  ItemtoHold: {fileID: 0}
+  AnimationStrings:
+  - baraction
+  RequiredPlayerCount: 1
+  RequiredTime: 3
+  ItemtoHold: {fileID: 5765990841309688554, guid: 5756db6a22040e94aa1d8f1e947e0b04,
+    type: 3}
   Synchronized: 0
   AnimationTime: 0
-  RequiresPot: 0
-  PotString: 
-  PatronString: 
-  MaxUseTime: 0
+  RequiresPot: 1
+  PotString: barfill
+  PatronString: barfly
+  MaxUseTime: 8

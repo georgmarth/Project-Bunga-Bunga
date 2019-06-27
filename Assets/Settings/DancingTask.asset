@@ -22,5 +22,5 @@ MonoBehaviour:
   AnimationTime: 2.42
   RequiresPot: 0
   PotString: 
-  PatronString: 
+  PatronString: barfly
   MaxUseTime: 0

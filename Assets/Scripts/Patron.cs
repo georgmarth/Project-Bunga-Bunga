@@ -20,6 +20,9 @@ public class Patron : MonoBehaviour
     public int individualTip = 1;
     public int FinalTip = 1;
 
+    public AudioClip[] GrumpyClips;
+    public AudioClip[] HappyClips;
+
     private PatronLocation _desiredTask;
     private Rigidbody _rb;
     private bool _fulfilled = false;
@@ -27,6 +30,8 @@ public class Patron : MonoBehaviour
     private int _animWalkId;
     private int _animStopId;
     private Vector3 _spawnLocation;
+
+    public AudioSource AudioSource;
 
     private void Awake()
     {
@@ -65,7 +70,7 @@ public class Patron : MonoBehaviour
 
             // --- IDLE OVER ---
 
-            _desiredTask = PickTask();
+            _desiredTask = PickTask2();
             State = PatronState.WALKING;
             Agent.enabled = true;
             Agent.SetDestination(_desiredTask.Location.position);
@@ -76,9 +81,11 @@ public class Patron : MonoBehaviour
 
             State = PatronState.WAITING;
             // play animation
-            Animator.SetTrigger(_desiredTask.TaskLocation.Task.PatronString);
+            Agent.enabled = false;
+            _rb.velocity = Vector3.zero;
             _rb.isKinematic = true;
             transform.SetPositionAndRotation(_desiredTask.Location.position, _desiredTask.Location.rotation);
+            Animator.SetTrigger(_desiredTask.TaskLocation.Task.PatronString);
             // init variables for loop
             float patienceRemaining = PatronSettings.Patience;
             float fulfillment = 0f;
@@ -104,6 +111,11 @@ public class Patron : MonoBehaviour
                     {
                         _fulfilled = true;
                         _completedTasks++;
+                        //play Sound
+                        AudioSource.clip = HappyClips[Random.Range(0, HappyClips.Length)];
+                        AudioSource.Play();
+
+                        GameEvents.TaskFulfilled?.Invoke(this);
                         GameEvents.AddMoney(1);
                         break;
                     }
@@ -130,6 +142,9 @@ public class Patron : MonoBehaviour
 
             if (!_fulfilled)
             {
+                //play Sound
+                AudioSource.clip = GrumpyClips[Random.Range(0, GrumpyClips.Length)];
+                AudioSource.Play();
                 break;
             }
         }
@@ -142,10 +157,15 @@ public class Patron : MonoBehaviour
         {
             // leave fulfilled
             GameEvents.AddMoney(1);
+            //play Sound
+            AudioSource.clip = HappyClips[Random.Range(0, HappyClips.Length)];
+            AudioSource.Play();
         }
         else
         {
-            // leave frustrated
+            //play Sound
+            AudioSource.clip = GrumpyClips[Random.Range(0, GrumpyClips.Length)];
+            AudioSource.Play();
         }
 
         GameEvents.PatronLeft?.Invoke(this, _fulfilled);
@@ -157,29 +177,24 @@ public class Patron : MonoBehaviour
         return (Agent.destination - _rb.position).sqrMagnitude < Agent.stoppingDistance;
     }
 
-    private PatronLocation PickTask()
+    private PatronLocation PickTask2()
     {
         var locations = FindObjectsOfType<TaskLocation>();
-        int iterations = 0;
-        do
+        List<PatronLocation> freeLocations = new List<PatronLocation>();
+        foreach (var location in locations)
         {
-            iterations++;
-            var location = locations[Random.Range(0, locations.Length)];
-            for (int i = 0; i < location.PatronLocations.Length; i++)
+            foreach (var patronLocation in location.PatronLocations)
             {
-                if (!location.PatronLocations[i].Reserved)
+                if (!patronLocation.Reserved)
                 {
-                    location.PatronLocations[i].Reserved = true;
-                    return location.PatronLocations[i];
+                    freeLocations.Add(patronLocation);
                 }
             }
-            if (iterations > 100)
-            {
-                Debug.LogError("Can't find a free location.");
-                break;
-            }
-        } while (true);
-        return null;
+        }
+        var desiredLocation = freeLocations[Random.Range(0, freeLocations.Count)];
+        desiredLocation.Reserved = true;
+
+        return desiredLocation;
     }
 
     private Vector3 PickIdleLocation()
