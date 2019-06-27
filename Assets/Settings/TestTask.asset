@@ -17,7 +17,9 @@ MonoBehaviour:
   RequiredPlayerCount: 1
   RequiredTime: 5
   ItemtoHold: {fileID: 0}
+  Synchronized: 0
+  AnimationTime: 0
   RequiresPot: 1
   PotString: polecleaning
-  PatronString: 
+  PatronString: barfly
   MaxUseTime: 10

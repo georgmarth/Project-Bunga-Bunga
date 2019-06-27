@@ -17,6 +17,9 @@ public class Patron : MonoBehaviour
 
     public PatronUI PatronUI;
 
+    public int individualTip = 1;
+    public int FinalTip = 1;
+
     private PatronLocation _desiredTask;
     private Rigidbody _rb;
     private bool _fulfilled = false;
@@ -73,7 +76,9 @@ public class Patron : MonoBehaviour
 
             State = PatronState.WAITING;
             // play animation
-            Animator.SetTrigger("stop");
+            Animator.SetTrigger(_desiredTask.TaskLocation.Task.PatronString);
+            _rb.isKinematic = true;
+            transform.SetPositionAndRotation(_desiredTask.Location.position, _desiredTask.Location.rotation);
             // init variables for loop
             float patienceRemaining = PatronSettings.Patience;
             float fulfillment = 0f;
@@ -99,6 +104,7 @@ public class Patron : MonoBehaviour
                     {
                         _fulfilled = true;
                         _completedTasks++;
+                        GameEvents.AddMoney(1);
                         break;
                     }
                 }
@@ -109,6 +115,13 @@ public class Patron : MonoBehaviour
             // close Overhead UI
             PatronUI.SetPatienceActive(false);
             PatronUI.SetFulfillmentActive(false);
+
+            // get off position
+            if (_desiredTask.ExitLocation != null)
+            {
+                transform.SetPositionAndRotation(_desiredTask.ExitLocation.position, _desiredTask.ExitLocation.rotation);
+            }
+            _rb.isKinematic = false;
 
             _desiredTask.Reserved = false;
             _desiredTask = null;
@@ -128,13 +141,14 @@ public class Patron : MonoBehaviour
         if (_fulfilled)
         {
             // leave fulfilled
+            GameEvents.AddMoney(1);
         }
         else
         {
             // leave frustrated
         }
 
-        GameEvents.PatronLeft?.Invoke(this);
+        GameEvents.PatronLeft?.Invoke(this, _fulfilled);
         Destroy(gameObject, .5f);
     }
 

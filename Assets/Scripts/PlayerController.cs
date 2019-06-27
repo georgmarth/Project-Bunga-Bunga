@@ -238,14 +238,28 @@ public class PlayerController : MonoBehaviour
         PlayerSwitcher.SwitchOption(false);
     }
 
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(.1f);
+        GameEvents.StartGame();
+    }
+
     public void OnStartGame()
     {
-        GameEvents.StartGame();
+        StartCoroutine(StartDelay());
     }
 
     private void OnGameStarted()
     {
         _pi.SwitchActions("CharacterAction");
+    }
+
+    private void OnPause()
+    {
+        if (GameEvents.GameState == GameState.RUNNING)
+            GameEvents.PauseGame();
+        else if (GameEvents.GameState == GameState.PAUSED)
+            GameEvents.UnpauseGame();
     }
 
     private IEnumerator DashRoutine()

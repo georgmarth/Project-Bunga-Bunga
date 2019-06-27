@@ -34,6 +34,16 @@
                     "processors": "AxisDeadzone",
                     "interactions": "Press",
                     "bindings": []
+                },
+                {
+                    "name": "Pause",
+                    "id": "ec0340c4-908e-4aad-a122-7e8977badc6c",
+                    "expectedControlLayout": "",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "AxisDeadzone",
+                    "interactions": "Press",
+                    "bindings": []
                 }
             ],
             "bindings": [
@@ -162,6 +172,32 @@
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Dash",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "e5021049-b50d-4230-8f51-3fe15b716829",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "1eb582ad-4606-4fcc-ba04-142725b023bf",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "chainWithPrevious": false,
                     "isComposite": false,
                     "isPartOfComposite": false,

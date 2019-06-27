@@ -59,5 +59,6 @@ public class PatronLocation
     public bool Reserved;
     public Patron Patron;
     public Transform Location;
+    public Transform ExitLocation;
     public TaskLocation TaskLocation;
 }

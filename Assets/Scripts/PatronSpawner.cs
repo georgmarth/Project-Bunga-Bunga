@@ -20,7 +20,7 @@ public class PatronSpawner : MonoBehaviour
 
     private void Awake()
     {
-        GameEvents.PatronLeft += patron => _numPatrons--;
+        GameEvents.PatronLeft += (patron, happy) => _numPatrons--;
         GameEvents.PatronSpawned += patron => _numPatrons++;
         GameEvents.GameStarted += OnGameStart;
         _spawnWait = new WaitForSeconds(SpawnRate);

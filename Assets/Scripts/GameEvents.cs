@@ -10,6 +10,8 @@ public class GameEvents : ScriptableObject
 {
     public GameState GameState = GameState.PLAYER_SELECT;
 
+    public int Money { get; private set; }
+
     public Action<GameObject> PlayerJoined;
     public Action<GameObject> PlayerLeft;
 
@@ -21,9 +23,11 @@ public class GameEvents : ScriptableObject
     public Action<float> LevelTimer;
 
     public Action<Patron> PatronSpawned;
-    public Action<Patron> PatronLeft;
+    public Action<Patron, bool> PatronLeft;
 
     public Action<Patron> TaskFulfilled;
+
+    public Action<int> MoneyChanged;
 
     public Action<int, string> OutfitListSwitched;
 
@@ -32,6 +36,7 @@ public class GameEvents : ScriptableObject
     public void OnEnable()
     {
         GameState = GameState.PLAYER_SELECT;
+        Money = 0;
     }
 
     public void PlayerJoin(GameObject gameObject)
@@ -69,5 +74,11 @@ public class GameEvents : ScriptableObject
             GameState = GameState.RUNNING;
             Unpause?.Invoke();
         }
+    }
+
+    public void AddMoney(int amount)
+    {
+        Money += amount;
+        MoneyChanged?.Invoke(Money);
     }
 }
