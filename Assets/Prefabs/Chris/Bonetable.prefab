@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 7737289377262105085}
   - component: {fileID: 4061357198269713668}
   m_Layer: 0
-  m_Name: BonetableWithChair
+  m_Name: Bonetable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
