@@ -9,6 +9,10 @@ public class PlayerTask : ScriptableObject
     public int RequiredPlayerCount;
     public float RequiredTime;
 
+    public GameObject ItemtoHold;
+
+    public bool Synchronized;
+    public float AnimationTime;
     public bool RequiresPot;
     public string PotString;
 

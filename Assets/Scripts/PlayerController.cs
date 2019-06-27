@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameEvents GameEvents;
 
-    public enum PlayerState { IDLE, INTERACTING, HOLDING, PLAYERSELECT }
+    public enum PlayerState { IDLE, INTERACTING, HOLDING, PLAYERSELECT, ANIMATION}
 
     public float MovementForce = 50f;
     public float StoppingForce = 2f;
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private WaitForSeconds _boostCooldownWait;
 
     private TaskLocation _currentLocation;
+    private TaskLocation _performingLocation;
     private Pickup _currentPickup;
 
     void Awake()
@@ -118,28 +119,101 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnAnimationTimeSynchronization(float value)
+    {
+        Animator.SetFloat("synctime", value);
+    }
+
     public void OnAction(InputValue inputValue)
     {
         if (inputValue.isPressed && _currentLocation != null && State == PlayerState.IDLE)
         {
-            State = PlayerState.INTERACTING;
-            _currentLocation.Performing = true;
-            _rb.isKinematic = true;
+            int performerNumber = _currentLocation.Performing;
+            if (performerNumber < _currentLocation.Task.RequiredPlayerCount)
+            {
+                // interact with location without item
+                State = PlayerState.INTERACTING;
+                Animator.SetTrigger(_currentLocation.GetAnimationString());
+                var animationTransform = _currentLocation.Locations[performerNumber];
+                transform.SetPositionAndRotation(animationTransform.position, animationTransform.rotation);
+                _currentLocation.Performing++;
+                _rb.isKinematic = true;
+                // hold item if the task has one
+                if (_currentLocation.Task.ItemtoHold != null)
+                {
+                    Instantiate(_currentLocation.Task.ItemtoHold, HoldingHand);
+                }
+                if (_currentLocation.Task.Synchronized)
+                {
+                    _currentLocation.UpdateSynchronizedTime += OnAnimationTimeSynchronization;
+                }
+                _performingLocation = _currentLocation;
+            }
         }
         else if (!inputValue.isPressed && State == PlayerState.INTERACTING)
         {
+            // stop interacting
             State = PlayerState.IDLE;
-            _currentLocation.Performing = false;
+            _performingLocation.Performing--;
+            Animator.SetTrigger("walk");
             _rb.isKinematic = false;
+            // Destroy all held items
+            {
+                foreach (Transform child in HoldingHand)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+            if (_performingLocation.Task.Synchronized)
+            {
+                _performingLocation.UpdateSynchronizedTime -= OnAnimationTimeSynchronization;
+            }
+            _performingLocation = null;
         }
         else if (inputValue.isPressed && _currentPickup != null && State == PlayerState.IDLE)
         {
+            // pick up item
             _currentPickup.Take();
             _currentPickup.transform.SetPositionAndRotation(HoldingHand.position, HoldingHand.rotation);
             _currentPickup.transform.SetParent(HoldingHand);
-            State = PlayerState.HOLDING;
+            _rb.isKinematic = true;
+            State = PlayerState.ANIMATION;
             Animator.SetTrigger("lift");
         }
+        else if (inputValue.isPressed && State == PlayerState.HOLDING)
+        {
+            if (_currentLocation != null && _currentLocation.Task.RequiresPot && _currentLocation.Performing == 0)
+            {
+                // use item on location
+                Debug.Log("use Pot");
+                foreach (Transform child in HoldingHand)
+                {
+                    Destroy(child.gameObject);
+                }
+                Animator.SetTrigger(_currentLocation.Task.PotString);
+                _currentLocation.FillUp();
+                _rb.isKinematic = true;
+                var animationTransform = _currentLocation.Locations[0];
+                transform.SetPositionAndRotation(animationTransform.position, animationTransform.rotation);
+                State = PlayerState.ANIMATION;
+            }
+            else
+            {
+                // drop item
+                var pickup = HoldingHand.GetChild(0).GetComponent<Pickup>();
+                pickup.PutDown();
+                HoldingHand.DetachChildren();
+                Animator.SetTrigger("walk");
+                State = PlayerState.IDLE;
+            }
+        }
+    }
+
+    // triggered by AnimatorController
+    public void AnimationEnd(PlayerState state)
+    {
+        State = state;
+        _rb.isKinematic = false;
     }
 
     // -- CHARACTER SELECTION

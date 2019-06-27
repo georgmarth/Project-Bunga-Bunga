@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a8e62c7a1a1b2b469046b369efc2587, type: 3}
-  m_Name: TestTask
+  m_Name: DancingTask
   m_EditorClassIdentifier: 
   AnimationStrings:
-  - poledance
-  RequiredPlayerCount: 1
+  - stagel
+  - stager
+  RequiredPlayerCount: 2
   RequiredTime: 5
   ItemtoHold: {fileID: 0}
-  RequiresPot: 1
-  PotString: polecleaning
+  Synchronized: 1
+  AnimationTime: 2.42
+  RequiresPot: 0
+  PotString: 
   PatronString: 
-  MaxUseTime: 10
+  MaxUseTime: 0

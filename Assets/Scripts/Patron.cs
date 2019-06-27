@@ -90,7 +90,9 @@ public class Patron : MonoBehaviour
                 PatronUI.SetPatience(Mathf.InverseLerp(PatronSettings.Patience, 0, patienceRemaining));
                 PatronUI.SetFulfillment(Mathf.InverseLerp(0, _desiredTask.TaskLocation.Task.RequiredTime, fulfillment));
 
-                if (_desiredTask.TaskLocation.Performing)
+                bool fulfilling = _desiredTask.TaskLocation.Performing >= _desiredTask.TaskLocation.Task.RequiredPlayerCount
+                    && (_desiredTask.TaskLocation.Task.RequiresPot ? _desiredTask.TaskLocation.UseLeft > 0f : true);
+                if (fulfilling)
                 {
                     fulfillment += Time.deltaTime;
                     if (fulfillment >= _desiredTask.TaskLocation.Task.RequiredTime)
