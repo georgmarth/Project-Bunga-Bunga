@@ -6,7 +6,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public Collider Trigger;
-    public Collider RigidCollider;
+    public Collider[] Colliders;
     private Rigidbody _rb;
 
     private void Awake()
@@ -17,14 +17,20 @@ public class Pickup : MonoBehaviour
     public void Take()
     {
         Trigger.enabled = false;
-        RigidCollider.enabled = false;
+        foreach (var collider in Colliders)
+        {
+            collider.enabled = false;
+        }
         _rb.isKinematic = true;
     }
 
     public void PutDown()
     {
         Trigger.enabled = true;
-        RigidCollider.enabled = true;
+        foreach (var collider in Colliders)
+        {
+            collider.enabled = true;
+        }
         _rb.isKinematic = false;
     }
 }

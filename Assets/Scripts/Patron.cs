@@ -188,6 +188,9 @@ public class Patron : MonoBehaviour
             Random.Range(WalkArea.bounds.min.x, WalkArea.bounds.max.x),
             Random.Range(WalkArea.bounds.min.y, WalkArea.bounds.max.y),
             Random.Range(WalkArea.bounds.min.z, WalkArea.bounds.max.z));
-        return location;
+        NavMeshHit hit;
+        float distance = (location - transform.position).magnitude;
+        NavMesh.SamplePosition(location, out hit, distance, 1);
+        return hit.position;
     }
 }

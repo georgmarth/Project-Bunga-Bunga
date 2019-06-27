@@ -76,6 +76,12 @@ public class GameEvents : ScriptableObject
         }
     }
 
+    public void EndGame()
+    {
+        GameState = GameState.GAMEOVER;
+        GameOver?.Invoke();
+    }
+
     public void AddMoney(int amount)
     {
         Money += amount;

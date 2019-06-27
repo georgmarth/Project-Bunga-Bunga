@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     private TaskLocation _performingLocation;
     private Pickup _currentPickup;
 
+    private ConsumeBox _consumeBox;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -185,7 +187,6 @@ public class PlayerController : MonoBehaviour
             if (_currentLocation != null && _currentLocation.Task.RequiresPot && _currentLocation.Performing == 0)
             {
                 // use item on location
-                Debug.Log("use Pot");
                 foreach (Transform child in HoldingHand)
                 {
                     Destroy(child.gameObject);
@@ -206,6 +207,17 @@ public class PlayerController : MonoBehaviour
                 Animator.SetTrigger("walk");
                 State = PlayerState.IDLE;
             }
+        }
+        else if (inputValue.isPressed && State == PlayerState.IDLE && _consumeBox != null)
+        {
+            // pick up item
+            Pickup pickup = Instantiate(_consumeBox.JugPrefab).GetComponent<Pickup>();
+            pickup.Take();
+            pickup.transform.SetPositionAndRotation(HoldingHand.position, HoldingHand.rotation);
+            pickup.transform.SetParent(HoldingHand);
+            _rb.isKinematic = true;
+            State = PlayerState.ANIMATION;
+            Animator.SetTrigger("lift");
         }
     }
 
@@ -262,6 +274,14 @@ public class PlayerController : MonoBehaviour
             GameEvents.UnpauseGame();
     }
 
+    private void OnQuit()
+    {
+        if (GameEvents.GameState == GameState.PAUSED || GameEvents.GameState == GameState.GAMEOVER)
+        {
+            Application.Quit();
+        }
+    }
+
     private IEnumerator DashRoutine()
     {
         _dashing = true;
@@ -283,12 +303,14 @@ public class PlayerController : MonoBehaviour
                 _currentLocation = location;
             }
         }
-
         else if (other.tag == "Pickup")
         {
             _currentPickup = other.GetComponent<Pickup>();
         }
-
+        else if (other.tag == "PickupBox")
+        {
+            _consumeBox = other.GetComponent<ConsumeBox>();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -312,6 +334,10 @@ public class PlayerController : MonoBehaviour
             {
                 _currentPickup = null;
             }
+        }
+        else if (other.tag == "PickupBox")
+        {
+            _consumeBox = null;
         }
     }
 }

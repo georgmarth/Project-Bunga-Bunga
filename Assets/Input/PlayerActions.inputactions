@@ -44,6 +44,16 @@
                     "processors": "AxisDeadzone",
                     "interactions": "Press",
                     "bindings": []
+                },
+                {
+                    "name": "Quit",
+                    "id": "94706b75-0ef6-4461-896a-32bf7b4c41ab",
+                    "expectedControlLayout": "",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "AxisDeadzone",
+                    "interactions": "Press",
+                    "bindings": []
                 }
             ],
             "bindings": [
@@ -198,6 +208,32 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "2f0c3cd7-378d-49da-a728-e37627ba5ee3",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Quit",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "a0873cfa-7033-4d84-b6ac-a50125f5f9be",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Quit",
                     "chainWithPrevious": false,
                     "isComposite": false,
                     "isPartOfComposite": false,

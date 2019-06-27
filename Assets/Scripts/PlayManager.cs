@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class PlayManager : MonoBehaviour
@@ -11,6 +12,9 @@ public class PlayManager : MonoBehaviour
     public float LevelTime = 300;
 
     public Transform GameUI;
+    public Transform PauseScreen;
+    public Transform GameOverScreen;
+    public TextMeshProUGUI ScoreText;
 
     public GameEvents GameEvents;
 
@@ -19,6 +23,8 @@ public class PlayManager : MonoBehaviour
         GameEvents.GameStarted += GameStarted;
         GameEvents.Pause += OnPause;
         GameEvents.Unpause += OnUnPause;
+        GameEvents.GameOver += OnGameOver;
+        GameEvents.LevelTimer += OnLevelTimer;
     }
 
     private void OnDisable()
@@ -26,6 +32,8 @@ public class PlayManager : MonoBehaviour
         GameEvents.GameStarted -= GameStarted;
         GameEvents.Pause -= OnPause;
         GameEvents.Unpause -= OnUnPause;
+        GameEvents.GameOver -= OnGameOver;
+        GameEvents.LevelTimer -= OnLevelTimer;
     }
 
     private void Update()
@@ -37,16 +45,37 @@ public class PlayManager : MonoBehaviour
         }
     }
 
+    private void OnLevelTimer(float time)
+    {
+        if (time <= 0f)
+        {
+            GameEvents.EndGame();
+        }
+    }
+
     public void OnPause()
     {
-        Time.timeScale = 0f;
         GameUI.gameObject.SetActive(false);
+        PauseScreen.gameObject.SetActive(true);
+        GameOverScreen.gameObject.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void OnUnPause()
     {
         GameUI.gameObject.SetActive(true);
+        PauseScreen.gameObject.SetActive(false);
+        GameOverScreen.gameObject.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void OnGameOver()
+    {
+        GameUI.gameObject.SetActive(false);
+        PauseScreen.gameObject.SetActive(false);
+        GameOverScreen.gameObject.SetActive(true);
+        ScoreText.SetText(GameEvents.Money.ToString());
+        Time.timeScale = 0f;
     }
 
     private void Start()

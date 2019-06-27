@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2064891730707259483}
   - component: {fileID: 7060798320477575789}
   - component: {fileID: 3657054576398722708}
+  - component: {fileID: 1394756861683206812}
   m_Layer: 0
   m_Name: Spear (1)
   m_TagString: Untagged
@@ -77,3 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &1394756861683206812
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097528551266865736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.08252932
+  m_Height: 1.5299963
+  m_Direction: 2
+  m_Center: {x: 0.000000029802322, y: 0.000000059604666, z: 0.7681805}
