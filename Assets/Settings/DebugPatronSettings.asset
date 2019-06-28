@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DebugPatronSettings
   m_EditorClassIdentifier: 
   DesiredTasks: 3
-  IdleLocations: 1
+  IdleLocations: 2
   IdleTime: {x: 1, y: 3}
   IdleWalkTime: {x: 5, y: 10}
   Patience: 20
