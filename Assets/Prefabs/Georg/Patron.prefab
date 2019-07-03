@@ -934,6 +934,11 @@ MonoBehaviour:
   HappyClips:
   - {fileID: 8300000, guid: b431f0aa1ee307045ba7d54019d4e3d5, type: 3}
   - {fileID: 8300000, guid: 1dd2ce6e123292f4d911c053aa816b7c, type: 3}
+  - {fileID: 8300000, guid: b431f0aa1ee307045ba7d54019d4e3d5, type: 3}
+  - {fileID: 8300000, guid: 1dd2ce6e123292f4d911c053aa816b7c, type: 3}
+  - {fileID: 8300000, guid: b431f0aa1ee307045ba7d54019d4e3d5, type: 3}
+  - {fileID: 8300000, guid: 1dd2ce6e123292f4d911c053aa816b7c, type: 3}
+  - {fileID: 8300000, guid: f3493ab740b059f46a03e90daa88d1c7, type: 3}
   AudioSource: {fileID: 4424357019079168422}
 --- !u!195 &5173829727850351349
 NavMeshAgent:
@@ -2042,7 +2047,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2645887258279116315}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 86c3b6cdb2023504892eed64d901ae70,
+        type: 3}
+      propertyPath: m_Name
+      value: Male
+      objectReference: {fileID: 0}
     - target: {fileID: 1211188444913507177, guid: 86c3b6cdb2023504892eed64d901ae70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493491999663679213, guid: 86c3b6cdb2023504892eed64d901ae70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1545598314881543356, guid: 86c3b6cdb2023504892eed64d901ae70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3284860503672832437, guid: 86c3b6cdb2023504892eed64d901ae70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247944217515270993, guid: 86c3b6cdb2023504892eed64d901ae70,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2107,26 +2137,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5493491999663679213, guid: 86c3b6cdb2023504892eed64d901ae70,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5247944217515270993, guid: 86c3b6cdb2023504892eed64d901ae70,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3284860503672832437, guid: 86c3b6cdb2023504892eed64d901ae70,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1545598314881543356, guid: 86c3b6cdb2023504892eed64d901ae70,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 273636735372503605, guid: 86c3b6cdb2023504892eed64d901ae70,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2152,11 +2162,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c28454dcadac70c41a4ed239ce6168bd, type: 2}
-    - target: {fileID: -927199367670048503, guid: 86c3b6cdb2023504892eed64d901ae70,
-        type: 3}
-      propertyPath: m_Name
-      value: Male
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86c3b6cdb2023504892eed64d901ae70, type: 3}
 --- !u!1 &8524604191977102309 stripped
