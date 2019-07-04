@@ -10,7 +10,8 @@ public class Patron : MonoBehaviour
 {
     public PatronSettings PatronSettings;
     public NavMeshAgent Agent;
-    public MeshRenderer WalkArea;
+    public Vector3 WalkAreaMin;
+    public Vector3 WalkAreaMax;
     public Animator Animator;
     public PatronState State { get; private set; }
     public GameEvents GameEvents;
@@ -200,9 +201,9 @@ public class Patron : MonoBehaviour
     private Vector3 PickIdleLocation()
     {
         Vector3 location = new Vector3(
-            Random.Range(WalkArea.bounds.min.x, WalkArea.bounds.max.x),
-            Random.Range(WalkArea.bounds.min.y, WalkArea.bounds.max.y),
-            Random.Range(WalkArea.bounds.min.z, WalkArea.bounds.max.z));
+            Random.Range(WalkAreaMin.x,WalkAreaMax.x),
+            Random.Range(WalkAreaMin.y, WalkAreaMax.y),
+            Random.Range(WalkAreaMin.z, WalkAreaMax.z));
         NavMeshHit hit;
         float distance = (location - transform.position).magnitude;
         NavMesh.SamplePosition(location, out hit, distance, 1);

@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level.unity
     guid: d3c0f68b5dd4c0142be79ff69f61531c
   - enabled: 1
-    path: Assets/Scenes/ProgrammingTest.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/Scenes/PlayerSelectScreen.unity
     guid: 714fa21811aea714f860997c49696de4
   m_configObjects:

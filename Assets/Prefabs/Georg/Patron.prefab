@@ -915,7 +915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatronSettings: {fileID: 11400000, guid: 60e0a0e79c7ce5449b5ce98f36d5771b, type: 2}
   Agent: {fileID: 5173829727850351349}
-  WalkArea: {fileID: 0}
+  WalkAreaMin: {x: 0, y: 0, z: 0}
+  WalkAreaMax: {x: 0, y: 0, z: 0}
   Animator: {fileID: 3358594888476886156}
   GameEvents: {fileID: 11400000, guid: d2f54dd946b95f04296d7c24f48763c1, type: 2}
   PatronUI: {fileID: 1115451798328123216}
@@ -949,19 +950,19 @@ NavMeshAgent:
   m_GameObject: {fileID: 2645887258279116312}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Radius: 0.49
+  m_Speed: 3
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 240
   m_StoppingDistance: 1.01
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.3
+  m_Height: 1.48
   m_BaseOffset: 0
   m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 2
 --- !u!54 &5114567749377661671
 Rigidbody:
   m_ObjectHideFlags: 0

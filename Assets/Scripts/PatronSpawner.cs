@@ -11,6 +11,8 @@ public class PatronSpawner : MonoBehaviour
 
     public GameEvents GameEvents;
     public MeshRenderer PatronWalkArea;
+    public Transform WalkAreaMin;
+    public Transform WalkAreaMax;
 
     private int _numPatrons;
     private WaitForSeconds _spawnWait;
@@ -47,7 +49,10 @@ public class PatronSpawner : MonoBehaviour
         var patronObject = Instantiate(PatronPrefabs[index], transform.position, transform.rotation);
         Patron patron = patronObject.GetComponent<Patron>();
         patron.GameEvents = GameEvents;
-        patron.WalkArea = PatronWalkArea;
+
+        patron.WalkAreaMin = WalkAreaMin.position;
+        patron.WalkAreaMax = WalkAreaMax.position;
+
         GameEvents.PatronSpawned?.Invoke(patron);
         return patron;
     }
