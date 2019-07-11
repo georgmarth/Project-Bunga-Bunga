@@ -20,6 +20,7 @@ public class GameEvents : ScriptableObject
     public Action GameWon;
     public Action Pause;
     public Action Unpause;
+    public Action Restart;
     public Action<float> LevelTimer;
 
     public Action<Patron> PatronSpawned;
@@ -35,8 +36,31 @@ public class GameEvents : ScriptableObject
 
     public void OnEnable()
     {
-        GameState = GameState.PLAYER_SELECT;
+        SetDefault();
+    }
+
+    public void SetDefault()
+    {
         Money = 0;
+        GameState = GameState.PLAYER_SELECT;
+
+        PlayerJoined = null;
+        PlayerLeft = null;
+
+        GameStarted = null;
+        GameOver = null;
+        GameWon = null;
+        Pause = null;
+        Unpause = null;
+        Restart = null;
+        LevelTimer = null;
+
+        PatronSpawned = null;
+        PatronLeft = null;
+        TaskFulfilled = null;
+        MoneyChanged = null;
+        OutfitListSwitched = null;
+        GetCamera = null;
     }
 
     public void PlayerJoin(GameObject gameObject)

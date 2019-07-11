@@ -54,6 +54,16 @@
                     "processors": "AxisDeadzone",
                     "interactions": "Press",
                     "bindings": []
+                },
+                {
+                    "name": "Restart",
+                    "id": "8c132bf2-eef6-485e-8ce3-2c6d5a801e13",
+                    "expectedControlLayout": "",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "AxisDeadzone",
+                    "interactions": "Press",
+                    "bindings": []
                 }
             ],
             "bindings": [
@@ -163,8 +173,60 @@
                 },
                 {
                     "name": "",
-                    "id": "ac0023b7-3708-4b99-a96b-e037b74ba2b1",
-                    "path": "<Gamepad>/leftTrigger",
+                    "id": "f0bab2cf-9d3c-4a74-af8c-a74de807d108",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "9918e6fb-4201-454e-8dfb-651c9a473cad",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "91b32050-c375-4f88-97ff-007dab35dd87",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "7abfa52c-ea04-47a5-ab7c-f3e8d7bc468b",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Dash",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "faf15b19-356f-4ae3-9ed9-476695d776a0",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -176,11 +238,11 @@
                 },
                 {
                     "name": "",
-                    "id": "7abfa52c-ea04-47a5-ab7c-f3e8d7bc468b",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "Press",
+                    "id": "60f05732-8b78-40b6-bf08-a369d5de2452",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard",
+                    "groups": ";Gamepad",
                     "action": "Dash",
                     "chainWithPrevious": false,
                     "isComposite": false,
@@ -238,6 +300,32 @@
                     "isComposite": false,
                     "isPartOfComposite": false,
                     "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "80baa912-54f2-4bbb-8f3c-e669f8f916c9",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "dc894a70-3a80-4666-bf8c-7443efd5712b",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
                 }
             ]
         },
@@ -252,7 +340,7 @@
                     "continuous": false,
                     "passThrough": false,
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "bindings": []
                 },
                 {

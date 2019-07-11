@@ -286,6 +286,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnRestart()
+    {
+        if (GameEvents.GameState == GameState.PAUSED || GameEvents.GameState == GameState.GAMEOVER)
+        {
+            GameEvents.Restart?.Invoke();
+        }
+    }
+
     private IEnumerator DashRoutine()
     {
         AudioSource.clip = DashClip;

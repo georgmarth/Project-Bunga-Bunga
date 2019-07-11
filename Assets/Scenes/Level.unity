@@ -47982,21 +47982,6 @@ PrefabInstance:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1536229336}
-    - target: {fileID: 2232609044487229425, guid: cbc8886b6f82c7f448df8a80aeee69e6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8665004889599789645, guid: cbc8886b6f82c7f448df8a80aeee69e6,
-        type: 3}
-      propertyPath: PlayerSelectScene
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8665004889599789645, guid: cbc8886b6f82c7f448df8a80aeee69e6,
-        type: 3}
-      propertyPath: LevelScene
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc8886b6f82c7f448df8a80aeee69e6, type: 3}
 --- !u!1001 &1491115273

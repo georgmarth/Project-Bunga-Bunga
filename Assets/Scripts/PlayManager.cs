@@ -25,6 +25,7 @@ public class PlayManager : MonoBehaviour
         GameEvents.Unpause += OnUnPause;
         GameEvents.GameOver += OnGameOver;
         GameEvents.LevelTimer += OnLevelTimer;
+        GameEvents.Restart += OnRestart;
     }
 
     private void OnDisable()
@@ -34,6 +35,7 @@ public class PlayManager : MonoBehaviour
         GameEvents.Unpause -= OnUnPause;
         GameEvents.GameOver -= OnGameOver;
         GameEvents.LevelTimer -= OnLevelTimer;
+        GameEvents.Restart -= OnRestart;
     }
 
     private void Update()
@@ -76,6 +78,20 @@ public class PlayManager : MonoBehaviour
         GameOverScreen.gameObject.SetActive(true);
         ScoreText.SetText(GameEvents.Money.ToString());
         Time.timeScale = 0f;
+    }
+
+    public void OnRestart()
+    {
+        Time.timeScale = 1;
+        GameEvents.SetDefault();
+        //SceneManager.UnloadSceneAsync(PlayerSelectScene);
+        //SceneManager.UnloadSceneAsync(LevelScene).completed += (_ => AllUnloaded());
+        SceneManager.LoadScene(LevelScene);
+    }
+
+    private void AllUnloaded()
+    {
+        SceneManager.LoadScene(LevelScene);
     }
 
     private void Start()
